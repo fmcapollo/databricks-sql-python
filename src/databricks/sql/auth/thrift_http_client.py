@@ -115,7 +115,8 @@ class THttpClient(thrift.transport.THttpClient.THttpClient):
             self.__pool = pool_class(self.host, self.port, **_pool_kwargs)
 
     def close(self):
-        self.__resp and self.__resp.drain_conn()
+        # Drain connection does not work in the current version of Python
+        #self.__resp and self.__resp.drain_conn()
         self.__resp and self.__resp.release_conn()
         self.__resp = None
 
